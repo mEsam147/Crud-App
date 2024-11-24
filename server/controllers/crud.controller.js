@@ -20,7 +20,7 @@ export const GetAllCrudData = async (req, res) => {
 export const getCrudDataById = async (req, res) => {
   const { id: crudId } = req.params;
   try {
-    const crudData = await Crud.findById(crudId);
+    const crudData = await Crud.findById(crudId).select("-author");
     if (!crudData) {
       return res
         .status(404)

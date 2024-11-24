@@ -19,6 +19,7 @@ const UpdateItem = () => {
     pages: singleCrudItem?.pages ?? 0,
     genre: singleCrudItem?.genre ?? "",
   };
+
   const [formData, setFormData] = useState(crudData);
   const { id } = useParams<{ id?: string }>();
   const navigate = useNavigate();
@@ -36,6 +37,7 @@ const UpdateItem = () => {
       navigate("/");
     }
   };
+
   if (singleCrudItemLoading) {
     return (
       <div className="flex justify-center items-center my-20">

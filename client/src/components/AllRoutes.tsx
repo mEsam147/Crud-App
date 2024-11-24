@@ -8,7 +8,6 @@ import { useAuthStore } from "../Store/UseAuthStore";
 
 const AllRoutes = () => {
   const { user } = useAuthStore();
-
   return (
     <Routes>
       <Route
