@@ -10,10 +10,7 @@ const AllRoutes = () => {
   const { user } = useAuthStore();
   return (
     <Routes>
-      <Route
-        path="/"
-        element={user ? <HomePage /> : <Navigate to={"/login"} />}
-      />
+      <Route path="/" element={<HomePage />} />
       <Route
         path="/login"
         element={!user ? <LoginPage /> : <Navigate to={"/"} />}
