@@ -62,39 +62,39 @@ export const useCrudStore = create<CrudState>((set) => ({
       set({ createLoading: false });
     }
   },
-deleteCrudItem: async (id: string) => {
-  set((state) => ({ ...state, deleteLoading: true }));
+  deleteCrudItem: async (id: string) => {
+    set((state) => ({ ...state, deleteLoading: true }));
 
-  const { isConfirmed } = await Swal.fire({
-    title: "Are you sure?",
-    text: "You won't be able to revert this!",
-    icon: "warning",
-    showCancelButton: true,
-    confirmButtonColor: "#3085d6",
-    cancelButtonColor: "#d33",
-    confirmButtonText: "Yes, delete it!",
-  });
+    const { isConfirmed } = await Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    });
 
-  if (isConfirmed) {
-    try {
-      await axios.delete(`/crud/${id}`);
-      set((state) => ({
-        crud: state.crud.filter((item) => item._id !== id),
-        deleteLoading: false,
-      }));
-      Swal.fire({
-        title: "Deleted!",
-        text: "Your item has been deleted.",
-        icon: "success",
-      });
-    } catch (error) {
+    if (isConfirmed) {
+      try {
+        await axios.delete(`/crud/${id}`);
+        set((state) => ({
+          crud: state.crud.filter((item) => item._id !== id),
+          deleteLoading: false,
+        }));
+        Swal.fire({
+          title: "Deleted!",
+          text: "Your item has been deleted.",
+          icon: "success",
+        });
+      } catch (error) {
+        set({ deleteLoading: false });
+        console.error(`Error deleting CRUD item: ${error}`);
+      }
+    } else {
       set({ deleteLoading: false });
-      console.error(`Error deleting CRUD item: ${error}`);
     }
-  } else {
-    set({ deleteLoading: false });
-  }
-},
+  },
   updateCrudItem: async (id: string, data: Crud) => {
     set({ updateLoading: true });
     try {

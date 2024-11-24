@@ -1,10 +1,12 @@
 import Crud from "../models/crud.model.js";
 export const GetAllCrudData = async (req, res) => {
   try {
-    const crudData = await Crud.find({}).populate({
-      path: "author",
-      select: "-password",
-    });
+    const crudData = await Crud.find({})
+      .populate({
+        path: "author",
+        select: "-password",
+      })
+      .sort({ author: 1 });
     if (crudData.length === 0 && !crudData) {
       return res.status(404).json({ message: "No crud data found" });
     }

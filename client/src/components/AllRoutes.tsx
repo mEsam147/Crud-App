@@ -8,7 +8,7 @@ import { useAuthStore } from "../Store/UseAuthStore";
 
 const AllRoutes = () => {
   const { user } = useAuthStore();
-  const isAdmin = user?.role === "admin";
+
   return (
     <Routes>
       <Route
@@ -25,11 +25,11 @@ const AllRoutes = () => {
       />
       <Route
         path="/create"
-        element={user && isAdmin ? <CreateItem /> : <Navigate to={"/"} />}
+        element={user ? <CreateItem /> : <Navigate to={"/"} />}
       />
       <Route
         path="/update/:id"
-        element={user && isAdmin ? <UpdateItem /> : <Navigate to={"/"} />}
+        element={user ? <UpdateItem /> : <Navigate to={"/"} />}
       />
     </Routes>
   );

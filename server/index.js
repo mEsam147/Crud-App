@@ -6,7 +6,7 @@ import connectDB from "./config/db.js";
 
 import userRoute from "./routes/user.route.js";
 import crudRoute from "./routes/crud.route.js";
-import { isAdmin, protectedRoute } from "./middleware/auth.middleware.js";
+import { protectedRoute } from "./middleware/auth.middleware.js";
 
 dotenv.config();
 
@@ -22,7 +22,7 @@ app.use(
 const port = process.env.PORT || 8000;
 
 app.use("/api/user", userRoute);
-app.use("/api/crud", protectedRoute, isAdmin, crudRoute);
+app.use("/api/crud", protectedRoute, crudRoute);
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
